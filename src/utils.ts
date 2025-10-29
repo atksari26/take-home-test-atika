@@ -4,7 +4,6 @@ export type OrderType = "asc" | "desc";
 const ASC: OrderType = "asc";
 const DESC: OrderType = "desc";
 
-// Fungsi pembanding domino
 function compareDomino(order: OrderType) {
   return function compare(a: Domino, b: Domino): number {
     const sumA = a[0] + a[1];
@@ -33,13 +32,11 @@ function compareDomino(order: OrderType) {
   };
 }
 
-// Mengurutkan domino naik/turun
 export function sort(dominoes: Domino[], order: OrderType = ASC): Domino[] {
   const selectedOrder: OrderType = order === DESC ? DESC : ASC;
   return dominoes.slice().sort(compareDomino(selectedOrder));
 }
 
-// Menghitung jumlah angka kembar (double)
 export function countDoubleNumber(dominoes: Domino[]): number {
   return dominoes.filter(([a, b]) => a === b).length;
 }

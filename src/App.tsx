@@ -14,18 +14,15 @@ const DEFAULT_DOMINOES: Domino[] = [
   [1, 2],
 ];
 
-// Fungsi untuk menggandakan daftar domino agar perubahan state tidak mengubah data awal.
 function cloneDominoes(list: Domino[]): Domino[] {
   return list.map(([top, bottom]) => [top, bottom]);
 }
 
-// Fungsi untuk mengubah daftar domino menjadi teks seperti contoh pada instruksi.
 function formatDominoes(list: Domino[]): string {
   const formattedPairs = list.map(([top, bottom]) => `(${top},${bottom})`);
   return `[${formattedPairs.join(", ")}]`;
 }
 
-// Komponen utama aplikasi Dominoes
 export default function App() {
   const [dominoes, setDominoes] = useState<Domino[]>(() =>
     cloneDominoes(DEFAULT_DOMINOES)
@@ -37,17 +34,14 @@ export default function App() {
     [dominoes]
   );
 
-  // Urutkan domino naik/turun
   const handleSort = (order: OrderType) => {
     setDominoes((prev) => sort(prev, order));
   };
 
-  // Tukar posisi atas dan bawah
   const handleFlip = () => {
     setDominoes((prev) => prev.map(([top, bottom]) => [bottom, top]));
   };
 
-  // Hapus duplikat domino (tanpa urutan)
   const handleRemoveDuplicates = () => {
     setDominoes((prev) => {
       const counts: Record<string, number> = {};
@@ -64,13 +58,11 @@ export default function App() {
     });
   };
 
-  // Reset data
   const handleReset = () => {
     setDominoes(cloneDominoes(DEFAULT_DOMINOES));
     setTotalToRemove("");
   };
 
-  // Hapus berdasarkan total nilai
   const handleRemoveByTotal = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const parsed = Number(totalToRemove);
